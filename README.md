@@ -1,2 +1,1 @@
 "# django-resume" 
-"# django-resume" 
