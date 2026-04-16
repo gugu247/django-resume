@@ -10,4 +10,17 @@ def resume_view(request):
         "education": profile.education.all(),
         "skill": profile.skill.all(),
     }
-    return render(request, template_name:'resume/resume.html', context)
+    return render(request, 'resume/resume.html', context)
+
+def skills_category(request):
+    profile = get_object_or_404(Profile)
+    skills = profile.skills.all()
+    grouped = {}
+    for skill in skills:
+        category = skill.get_category_display()
+        if category not in grouped:
+            grouped[category] = []
+        grouped[category].append(skill)
+    return render(request, 'resume/skills.html', {'grouped': grouped})
+
+
